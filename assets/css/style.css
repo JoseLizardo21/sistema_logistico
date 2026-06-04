@@ -1,0 +1,89 @@
+:root {
+  --sidebar-bg: #1e2a3a;
+  --sidebar-hover: #2d3f55;
+  --sidebar-active: #3498db;
+  --topbar-bg: #2c3e50;
+  --accent: #3498db;
+}
+
+body { background: #f0f2f5; font-family: 'Segoe UI', sans-serif; }
+
+/* ---- Layout ---- */
+.wrapper { display: flex; min-height: 100vh; }
+
+.sidebar {
+  width: 240px; min-height: 100vh;
+  background: var(--sidebar-bg);
+  color: #cdd9e5;
+  flex-shrink: 0;
+  position: fixed; top: 0; left: 0; height: 100%;
+  overflow-y: auto; z-index: 1000;
+  transition: width .25s ease;
+}
+.sidebar.collapsed { width: 60px; }
+.sidebar.collapsed .sidebar-heading,
+.sidebar.collapsed span { display: none; }
+.sidebar.collapsed .sidebar-brand span { display: none; }
+
+.sidebar-brand {
+  padding: 18px 20px;
+  font-size: 1.1rem; font-weight: 700;
+  color: #fff; background: #162030;
+  white-space: nowrap; overflow: hidden;
+  border-bottom: 1px solid #2d3f55;
+}
+
+.sidebar-heading {
+  font-size: 0.68rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1px;
+  color: #7f8fa4; padding: 14px 20px 4px;
+}
+
+.sidebar-menu { list-style: none; padding: 0; margin: 0; }
+.sidebar-item a {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 20px; color: #cdd9e5;
+  text-decoration: none; font-size: 0.875rem;
+  transition: background .2s;
+}
+.sidebar-item a:hover  { background: var(--sidebar-hover); color: #fff; }
+.sidebar-item.active a { background: var(--sidebar-active); color: #fff; border-radius: 0 6px 6px 0; }
+.sidebar-item a i      { width: 20px; text-align: center; font-size: 1rem; }
+
+.main-content { margin-left: 240px; flex: 1; display: flex; flex-direction: column; transition: margin-left .25s ease; }
+.main-content.expanded { margin-left: 60px; }
+
+/* ---- Topbar ---- */
+.topbar { background: var(--topbar-bg); padding: 0 16px; height: 56px; border-radius: 0; }
+
+/* ---- Content ---- */
+.content-body { flex: 1; }
+
+/* ---- Cards ---- */
+.stat-card { border-radius: 12px; border: none; box-shadow: 0 2px 12px rgba(0,0,0,.08); }
+.stat-card .card-body { padding: 20px; }
+.stat-icon { width: 52px; height: 52px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; }
+
+/* ---- Tables ---- */
+.table-card { border-radius: 12px; border: none; box-shadow: 0 2px 12px rgba(0,0,0,.08); overflow: hidden; }
+.table-card .card-header { background: #fff; border-bottom: 1px solid #eee; font-weight: 600; }
+
+/* ---- Badges stock ---- */
+.badge-stock-ok  { background: #d4edda; color: #155724; }
+.badge-stock-low { background: #fff3cd; color: #856404; }
+.badge-stock-zero{ background: #f8d7da; color: #721c24; }
+
+/* ---- Print ---- */
+@media print {
+  .sidebar, .topbar, .btn, .no-print { display: none !important; }
+  .main-content { margin-left: 0 !important; }
+  .content-body { padding: 0 !important; }
+  body { background: #fff; }
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  .sidebar { width: 0; overflow: hidden; }
+  .sidebar.mobile-open { width: 240px; }
+  .main-content { margin-left: 0; }
+}
